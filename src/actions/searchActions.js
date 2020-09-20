@@ -1,6 +1,5 @@
 import { ActionTypes } from "./actionTypes";
-import { authenticate } from "../api/mockApi";
-
+import { localStorageFunction } from "../utils";
 export const searchSuccessed = (movies) => {
   return {
     type: ActionTypes.SEARCH_SUCCESS,
@@ -21,9 +20,11 @@ export const searchFailed = (error) => {
   };
 };
 
-export const searchMovie = (movie) => {
+export const searchMovie = (keyword) => {
+  localStorageFunction(keyword);
+
   return (dispatch) => {
-    fetch(`http://www.omdbapi.com/?s=${movie}&apikey=424b1648`)
+    fetch(`http://www.omdbapi.com/?s=${keyword}&apikey=424b1648`)
       .then((response) => response.json())
       .then((data) => dispatch(searchSuccessed(data.Search)))
       .catch((error) => {
