@@ -1,14 +1,15 @@
 import React from "react";
 
-const SearchComponent = ({ onChange }) => {
+const SearchComponent = ({ onChange, onFocus, value }) => {
   return (
     <div className="form-group">
-      <label className="label">Enter a keyword</label>
       <input
         type="text"
         className="form-control"
-        placeholder="Inception"
+        placeholder="movie name..."
         onChange={onChange}
+        onFocus={onFocus}
+        value={value}
       />
     </div>
   );
