@@ -6,12 +6,6 @@ export const searchSuccessed = (movies) => {
   };
 };
 
-export const searchIsLoding = () => {
-  return {
-    type: ActionTypes.SEARCH_LODING,
-  };
-};
-
 export const searchFailed = (error) => {
   return {
     type: ActionTypes.SEARCH_FAIL,
