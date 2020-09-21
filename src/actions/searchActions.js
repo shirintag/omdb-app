@@ -1,5 +1,4 @@
 import { ActionTypes } from "./actionTypes";
-import { localStorageFunction } from "../utils";
 export const searchSuccessed = (movies) => {
   return {
     type: ActionTypes.SEARCH_SUCCESS,
@@ -20,10 +19,16 @@ export const searchFailed = (error) => {
   };
 };
 
-export const searchMovie = (keyword) => {
-  localStorageFunction(keyword);
+export const saveLastSearch = (keyword) => {
+  return {
+    type: ActionTypes.SEARCH_KEYWORD,
+    keyword,
+  };
+};
 
+export const searchMovie = (keyword) => {
   return (dispatch) => {
+    dispatch(saveLastSearch(keyword));
     fetch(`http://www.omdbapi.com/?s=${keyword}&apikey=424b1648`)
       .then((response) => response.json())
       .then((data) => dispatch(searchSuccessed(data.Search)))

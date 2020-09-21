@@ -1,9 +1,11 @@
 import { ActionTypes } from "../actions/actionTypes";
+import { getLastSearches } from "../utils";
 
 const initialState = {
   isLoding: false,
   movies: [],
   error: "",
+  lastSearches: [],
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -23,6 +25,11 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoding: true,
+    case ActionTypes.SEARCH_KEYWORD:
+      let lastSearches = getLastSearches(state.lastSearches, action.keyword);
+      return {
+        ...state,
+        lastSearches: lastSearches,
       };
     default:
       return state;
